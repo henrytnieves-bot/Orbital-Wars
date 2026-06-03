@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Build artifacts
+submission.tar.gz
+build/
+tmp_download/
+
+# Replays
+replay.html
+replays/
+
+# IDE
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
