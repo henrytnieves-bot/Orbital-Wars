@@ -1,3 +1,3 @@
 # Orbital Wars
 
-A game repository for Orbital Wars.
+A game repository for the project Orbital Wars.
