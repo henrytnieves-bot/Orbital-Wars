@@ -1,4 +1,4 @@
-name: The Producer
+name: OG Producer
 description: "A greedy, ROI-heuristic agent that plans launch waves and regroup flows to maximize predicted ship production."
 author: "Slawek Biel"
 license: "MIT"
