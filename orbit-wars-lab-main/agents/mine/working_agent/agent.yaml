@@ -1,0 +1,5 @@
+name: Working Agent
+description: "Duplicated from orbit-wars-agent-top-jun-11 to iterate and improve."
+author: "User"
+license: "MIT"
+tags: [rule-based, heuristic, production, wave-planning]

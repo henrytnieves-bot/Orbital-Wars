@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-06-11T22:56:24.065694+00:00",
+  "last_updated": "2026-06-11T23:15:07.934214+00:00",
   "ratings": {
     "baselines/random": {
       "2p": {
@@ -143,44 +143,44 @@
     },
     "mine/og-producer": {
       "2p": {
-        "mu": 618.3175922653369,
-        "sigma": 30.07797963679699,
-        "games_played": 50
+        "mu": 607.056606549089,
+        "sigma": 18.80056592788723,
+        "games_played": 300
       }
     },
     "external/im-better": {
       "2p": {
-        "mu": 599.989098249469,
-        "sigma": 28.190724233197393,
-        "games_played": 50
+        "mu": 613.4921443753959,
+        "sigma": 18.66362875946363,
+        "games_played": 300
       }
     },
     "external/orbit-wars-agent-top-jun-11": {
       "2p": {
-        "mu": 576.4682574543968,
-        "sigma": 28.72252448748807,
-        "games_played": 50
+        "mu": 619.7294258599254,
+        "sigma": 18.851793310303986,
+        "games_played": 300
       }
     },
     "external/producer-v5": {
       "2p": {
-        "mu": 572.3151587605148,
-        "sigma": 28.41053626845966,
-        "games_played": 50
+        "mu": 584.8969056802375,
+        "sigma": 18.849835534227083,
+        "games_played": 300
       }
     },
     "external/simplified-orbit-wars-agent": {
       "2p": {
-        "mu": 614.1705203938592,
-        "sigma": 27.055574765967364,
-        "games_played": 50
+        "mu": 599.160063929351,
+        "sigma": 18.78599087283893,
+        "games_played": 300
       }
     },
     "external/submission-50-agent": {
       "2p": {
-        "mu": 626.1813272558734,
-        "sigma": 27.638426565604448,
-        "games_played": 50
+        "mu": 585.0675442138653,
+        "sigma": 18.79898219682555,
+        "games_played": 300
       }
     }
   }
