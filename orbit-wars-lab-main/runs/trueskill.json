@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "last_updated": "2026-06-11T22:22:38.193234+00:00",
+  "ratings": {
+    "baselines/random": {
+      "2p": {
+        "mu": 393.69838519720497,
+        "sigma": 36.33987057720596,
+        "games_played": 82
+      },
+      "4p": {
+        "mu": 520.0091553747343,
+        "sigma": 15.944620741139847,
+        "games_played": 120
+      }
+    },
+    "baselines/starter": {
+      "2p": {
+        "mu": 576.4880091648863,
+        "sigma": 35.97587591815188,
+        "games_played": 82
+      },
+      "4p": {
+        "mu": 558.1748825221213,
+        "sigma": 16.118013770804424,
+        "games_played": 120
+      }
+    },
+    "baselines/nearest-sniper": {
+      "2p": {
+        "mu": 510.68913154569293,
+        "sigma": 34.66751975600743,
+        "games_played": 82
+      },
+      "4p": {
+        "mu": 532.1464935553644,
+        "sigma": 15.87616556378035,
+        "games_played": 120
+      }
+    },
+    "external/pilkwang-structured": {
+      "2p": {
+        "mu": 917.5307006577506,
+        "sigma": 35.18414532005922,
+        "games_played": 82
+      },
+      "4p": {
+        "mu": 690.9707983845703,
+        "sigma": 18.785643406732202,
+        "games_played": 120
+      }
+    },
+    "external/tamrazov-starwars": {
+      "2p": {
+        "mu": 944.4870341034753,
+        "sigma": 34.87100619295222,
+        "games_played": 82
+      },
+      "4p": {
+        "mu": 634.8717377630944,
+        "sigma": 17.262694534684016,
+        "games_played": 120
+      }
+    },
+    "external/yuriygreben-architect": {
+      "2p": {
+        "mu": 900.5299414158312,
+        "sigma": 35.228792342392154,
+        "games_played": 82
+      },
+      "4p": {
+        "mu": 643.9296328444976,
+        "sigma": 17.473885937023457,
+        "games_played": 120
+      }
+    },
+    "external/sigmaborov-reinforce": {
+      "2p": {
+        "mu": 788.2992555284569,
+        "sigma": 34.91058642160707,
+        "games_played": 82
+      },
+      "4p": {
+        "mu": 621.587229604134,
+        "sigma": 17.014673495191918,
+        "games_played": 120
+      }
+    },
+    "external/sigmaborov-starter": {
+      "2p": {
+        "mu": 622.2794949439179,
+        "sigma": 36.850914594431856,
+        "games_played": 82
+      },
+      "4p": {
+        "mu": 552.5213559223446,
+        "sigma": 16.034590539846775,
+        "games_played": 120
+      }
+    },
+    "external/kashiwaba-rl": {
+      "2p": {
+        "mu": 219.33484751690344,
+        "sigma": 33.08627226130757,
+        "games_played": 82
+      },
+      "4p": {
+        "mu": 527.6951974139139,
+        "sigma": 15.86994170950161,
+        "games_played": 120
+      }
+    },
+    "external/ykhnkf-distance-prioritized": {
+      "2p": {
+        "mu": 231.51289616456222,
+        "sigma": 32.26387324474644,
+        "games_played": 82
+      },
+      "4p": {
+        "mu": 526.4088518355982,
+        "sigma": 15.891958000266913,
+        "games_played": 120
+      }
+    },
+    "external/pascal-orbitwork-v14": {
+      "2p": {
+        "mu": 222.80354938402212,
+        "sigma": 32.21931106820965,
+        "games_played": 82
+      },
+      "4p": {
+        "mu": 529.2061730684793,
+        "sigma": 15.883197102384887,
+        "games_played": 120
+      }
+    },
+    "mine/producer": {
+      "2p": {
+        "mu": 1034.494728741729,
+        "sigma": 59.89745183884221,
+        "games_played": 22
+      }
+    }
+  }
+}

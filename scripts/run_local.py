@@ -67,7 +67,7 @@ def main():
     if args.steps is not None:
         config["episodeSteps"] = args.steps
 
-    main_agent = os.path.join(PROJECT_ROOT, "main.py")
+    main_agent = os.path.join(PROJECT_ROOT, "orbit-wars-lab-main", "agents", "mine", "producer", "main.py")
 
     # Build player list
     if args.opponent == "random":

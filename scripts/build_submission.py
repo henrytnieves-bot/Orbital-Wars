@@ -17,15 +17,16 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def build_submission(output_path: str, verify: bool = False):
-    main_py = os.path.join(PROJECT_ROOT, "main.py")
-    orbit_lite_dir = os.path.join(PROJECT_ROOT, "orbit_lite")
+    main_py = os.path.join(PROJECT_ROOT, "orbit-wars-lab-main", "agents", "mine", "producer", "main.py")
+    orbit_lite_dir = os.path.join(PROJECT_ROOT, "orbit-wars-lab-main", "agents", "mine", "producer", "orbit_lite")
+    agent_dir = os.path.dirname(main_py)
 
     # Validate required files exist
     if not os.path.isfile(main_py):
-        print("ERROR: main.py not found at project root.")
+        print("ERROR: main.py not found at integrated agent directory.")
         sys.exit(1)
     if not os.path.isdir(orbit_lite_dir):
-        print("ERROR: orbit_lite/ directory not found at project root.")
+        print("ERROR: orbit_lite/ directory not found at integrated agent directory.")
         sys.exit(1)
 
     # Build the tarball
@@ -41,7 +42,7 @@ def build_submission(output_path: str, verify: bool = False):
                 if f.endswith(".pyc"):
                     continue
                 full_path = os.path.join(root, f)
-                arcname = os.path.relpath(full_path, PROJECT_ROOT)
+                arcname = os.path.relpath(full_path, agent_dir)
                 tar.add(full_path, arcname=arcname)
 
     size_kb = os.path.getsize(output_path) / 1024
