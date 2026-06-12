@@ -2,63 +2,6 @@
 
 Conquer planets rotating around a sun in continuous 2D space. A real-time strategy game for 2 or 4 players.
 
-## Quick Start
-
-**Active agent:** Producer Lite (`main.py`) — a greedy heuristic agent that maximizes predicted ship production via offensive captures and defensive regrouping. Depends on `orbit_lite/` helper library.
-
-### Prerequisites
-
-```bash
-pip install "kaggle-environments>=1.28.0" torch
-```
-
-### Run a Local Game
-
-```bash
-# Producer vs random opponent
-python scripts/run_local.py
-
-# Producer vs the simple Nearest Planet Sniper
-python scripts/run_local.py --opponent agents/sniper.py
-
-# 4-player free-for-all
-python scripts/run_local.py --players 4
-
-# Fixed seed + save HTML replay
-python scripts/run_local.py --seed 42 --render
-```
-
-### Build & Submit
-
-```bash
-# Package main.py + orbit_lite/ into submission.tar.gz
-python scripts/build_submission.py --verify
-
-# Submit to Kaggle
-python scripts/submit.py -m "Producer Lite v1"
-
-# Build + submit in one command
-python scripts/submit.py --build -m "Producer Lite v1"
-
-# Check submission status
-python scripts/submit.py --status
-```
-
-### Project Structure
-
-```
-├── main.py                  # Producer Lite agent (Kaggle entry point)
-├── orbit_lite/              # Helper library (tensor-based game simulation)
-├── agents/
-│   └── sniper.py            # Simple Nearest Planet Sniper (alternate agent)
-├── scripts/
-│   ├── run_local.py         # Run local games
-│   ├── build_submission.py  # Package submission archive
-│   └── submit.py            # Submit to Kaggle + check status
-├── README.md                # This file (game rules reference)
-└── agents.md                # Competition getting-started guide
-```
-
 ## Overview
 
 Players start with a single home planet and compete to control the map by sending fleets to capture neutral and enemy planets. The board is a 100x100 continuous space with a sun at the center. Planets orbit the sun, comets fly through on elliptical trajectories, and fleets travel in straight lines. The game lasts 500 turns. The player with the most total ships (on planets + in fleets) at the end wins.
