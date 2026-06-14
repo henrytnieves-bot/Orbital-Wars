@@ -1,0 +1,5 @@
+name: Producer V2
+description: "Flow-diff scored, single-source greedy planner with intercept aiming, reinforcement risk modeling, and pressure-gradient regroup."
+author: "Slawek Biel"
+license: "MIT"
+tags: [rule-based, heuristic, production]

@@ -1,0 +1,3 @@
+name: Shoo
+description: "Producer variant with aggressive fleet dispatch."
+tags: [rule-based, heuristic, production]

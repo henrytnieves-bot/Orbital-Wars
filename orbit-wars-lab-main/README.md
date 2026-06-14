@@ -1,0 +1,252 @@
+# Orbit Wars Lab
+
+Local tournament runner + visualizer for the
+[Orbit Wars Kaggle competition](https://www.kaggle.com/competitions/orbit-wars).
+
+Ships with 11 agents out-of-the-box (3 baselines + 7 curated rule-based
+from public Kaggle notebooks + 1 PPO RL agent) and a pre-seeded TrueSkill
+leaderboard. Adds a browser UI on top of the official Kaggle replay player:
+live stats sidebar, click-to-select planets/fleets, multi-selection with
+inbound-fleet ETAs, light/dark mode, and separate tournament formats
+(round-robin + gauntlet).
+
+![Quick Match view — light mode with planet selected](docs/screenshots/01-quick-match-view-light.png)
+
+<details>
+<summary>More screenshots</summary>
+
+| | |
+|---|---|
+| ![dark mode](docs/screenshots/02-quick-match-view-dark.png) | ![picker](docs/screenshots/03-quick-match-picker.png) |
+| Dark mode + fleet trajectories | Agent picker (2p / 4p, with ratings) |
+| ![tournaments](docs/screenshots/04-tournaments-create.png) | ![standings](docs/screenshots/05-tournament-standings.png) |
+| Tournament creator (round-robin / gauntlet) | Tournament standings + head-to-head matrix |
+| ![replays](docs/screenshots/06-replays-list.png) | ![agents](docs/screenshots/07-agents-zoo.png) |
+| Unified replay library (local + Kaggle import) | Agent zoo with tags |
+| ![leaderboard](docs/screenshots/08-leaderboard.png) | |
+| TrueSkill leaderboard — 2p / 4p / combined | |
+
+</details>
+
+---
+
+## Quick start
+
+### Option 1: Docker (recommended)
+
+```bash
+git clone https://github.com/automatylicza/orbit-wars-lab.git
+cd orbit-wars-lab
+docker compose up
+```
+
+Open <http://localhost:6001>. Done.
+
+First run builds the image (~3-5 min, pulls pytorch CPU). Subsequent `up`
+is instant.
+
+**Port conflict?** Set `PORT` to anything free:
+```bash
+PORT=7001 docker compose up
+```
+
+**macOS / non-standard UID:** to have files written by the container owned
+by your host user (not `1000`), create a `.env` once:
+
+```bash
+cp .env.example .env          # shows available overrides
+echo "UID=$(id -u)" > .env    # or just do this one-liner
+echo "GID=$(id -g)" >> .env
+```
+
+### Option 2: Native dev (faster iteration)
+
+Requires **Python 3.12** + **pnpm** (`npm i -g pnpm`).
+
+```bash
+git clone https://github.com/automatylicza/orbit-wars-lab.git
+cd orbit-wars-lab
+bash scripts/dev.sh
+```
+
+Script creates `.venv`, installs deps, and starts backend (:8000) + Vite
+viewer (:6001) with hot-reload. Open <http://localhost:6001>.
+
+---
+
+## What you get
+
+- **11 agents ready to play** (see [`agents/`](agents/))
+  - `baselines/{random,starter,nearest-sniper}` — reference agents shipped
+    by Kaggle
+  - `external/pilkwang-structured` — 131 votes, LB claim ~1000, most
+    rule-layered reference
+  - `external/tamrazov-starwars` — LB claim 1224, simulation-based
+  - `external/sigmaborov-{starter,reinforce}` — rule-based with comet/sun
+    awareness
+  - `external/yuriygreben-architect` — physics-aware multi-phase
+  - `external/ykhnkf-distance-prioritized` — distance-prioritized
+    targeting, LB claim 1100
+  - `external/pascal-orbitwork-v14` — fork-iteration v14
+  - `external/kashiwaba-rl` — PPO neural-net policy (2000 updates
+    checkpoint)
+- **Pre-seeded TrueSkill leaderboard** (`runs/trueskill.json`) — local
+  tournament results that accumulate as you play. Reset to empty on
+  2026-04-25 after the Kaggle engine update (Bovard's 4-fold rotational
+  symmetry fix per [discussion #694310](https://www.kaggle.com/competitions/orbit-wars/discussion/694310));
+  re-seed by running a tournament once (Tournaments → round-robin →
+  pick all bundled agents → ~3 min).
+- **Quick Match UI** — pick 2 or 4 agents, play a game, view replay with a
+  live-stats sidebar (select any planet/fleet to see ships, production,
+  inbound fleets + ETA, destination, speed).
+- **Tournaments** — two formats:
+  - *Round-robin* (every pair ×K games)
+  - *Gauntlet* (one challenger vs the rest ×K games) — useful when you add
+    your own agent and want fast relative rating.
+- **Replay library** — combined view of local tournament replays + any
+  Kaggle episodes you import (paste a Kaggle URL).
+- **Kaggle integration (optional)** — wire up your own Kaggle API token
+  through the Settings tab to browse your own leaderboard submissions and
+  push new ones directly from the UI. The token stays on your host machine
+  at `~/.kaggle/kaggle.json` (chmod 600); see [Kaggle integration](#kaggle-integration)
+  below for setup.
+
+Everything lives in one Python process (FastAPI backend) serving the Vite
+frontend as static files — no separate node runtime in production.
+
+---
+
+## Adding your own agent
+
+```bash
+cp -r agents/baselines/starter agents/mine/v1-my-bot
+# edit agents/mine/v1-my-bot/main.py — replace the `def agent(obs)` body
+```
+
+The `./agents` folder is mounted into the container as a live volume, so
+changes are picked up immediately — no `docker compose build` needed.
+Refresh the browser, then in *Quick Match → Picker → mine* you'll see
+your agent.
+
+For a full benchmark, run a Gauntlet tournament with your agent as the
+challenger (*Tournaments → Shape: gauntlet → Challenger: mine/v1-my-bot*).
+
+CLI equivalent (works inside the container too — `docker compose exec app
+orbit-wars-tournament gauntlet ...`):
+
+```bash
+python -m orbit_wars_app.tournament gauntlet mine/v1-my-bot --games-per-pair 10
+```
+
+---
+
+## Where your data lives
+
+Both Docker and native dev write to **your host filesystem** — everything
+persists across container restarts / clones / rebuilds:
+
+| Folder | What's there | Edited by |
+|---|---|---|
+| `./agents/` | 9 bundled agents + anything you drop in `mine/` | you |
+| `./runs/trueskill.json` | TrueSkill leaderboard (seeded, live-updated) | app |
+| `./runs/<date-id>/` | Tournament metadata + match results | app |
+| `./runs/<date-id>/replays/*.json` | Replay for each match | app |
+
+Delete `runs/` if you want to wipe ratings + history and start fresh.
+Your agents are untouched.
+
+---
+
+## Kaggle integration
+
+The **Submissions** tab (and its "Submit new agent" flow) needs your own
+Kaggle API token. Without one it shows a banner pointing to Settings —
+the rest of the app (Quick Match, Tournaments, local Leaderboard, Replays)
+works fine without any Kaggle auth.
+
+### Get a token
+
+1. Sign in at [kaggle.com](https://www.kaggle.com) and open
+   [kaggle.com/settings/account](https://www.kaggle.com/settings/account).
+2. Scroll to **API**. Two formats are accepted:
+   - **New format (recommended):** click *"Generate API Token"* — copy the
+     `KGAT_…` string shown on screen.
+   - **Legacy format:** if Kaggle still offers *"Create New Token"*, use
+     that — it downloads a `kaggle.json` file.
+3. Accept the [Orbit Wars competition rules](https://www.kaggle.com/competitions/orbit-wars/rules)
+   so the token can list your submissions.
+
+### Save it
+
+**Via the UI (recommended):** open **Settings → Kaggle integration**,
+paste either the bare `KGAT_…` token or the contents of `kaggle.json`,
+click **Test & save**. The backend validates against Kaggle's API and
+writes the resolved credentials to `~/.kaggle/kaggle.json` (chmod 600).
+
+**Via env vars (CI-friendly):** set `KAGGLE_USERNAME` and `KAGGLE_KEY`
+before starting the backend. Env vars win over the file at Kaggle SDK
+read time — the Settings tab reflects this with a "via env vars" badge
+and hides write buttons (you can't mutate another process's environment).
+
+### Docker
+
+The token file isn't mounted by default — uncomment one of the
+`.kaggle/` volume lines in `docker-compose.yml` to pick either:
+
+- `~/.kaggle:/home/app/.kaggle` — reuse the token you already have for
+  the `kaggle` CLI on the host
+- `./.kaggle-data:/home/app/.kaggle` — keep a separate per-project token
+  that lives next to the compose file
+
+Without a mount, tokens pasted in Settings vanish on container restart.
+
+### Privacy
+
+The token never leaves your machine except when the app talks to
+`kaggle.com` directly on your behalf (listing submissions, uploading a
+new one). The backend does not echo the token back to the browser —
+status responses only contain the username.
+
+Forked agent subprocesses run with `KAGGLE_*` environment variables
+stripped, so third-party agent code in `agents/external/` cannot read
+your token via `os.environ`. The token still lives on disk at
+`~/.kaggle/kaggle.json` (chmod 600), readable by any process running
+as your user — that is a host-level boundary, not an app-level one.
+
+---
+
+## Architecture
+
+```
+viewer/              Vite + TypeScript SPA (vanilla DOM, no framework)
+orbit_wars_app/      FastAPI backend + tournament runner (Python 3.12)
+web/core/            Vendored @kaggle-environments/core (React replay player)
+agents/
+  baselines/         Reference agents (tracked in git)
+  external/          Curated public notebooks (tracked in git)
+  mine/              Your agents go here
+runs/
+  trueskill.json     Persistent TrueSkill state (seeded snapshot)
+```
+
+`docker-compose.yml` runs a single multi-stage image:
+
+1. Node builder → `viewer/dist`
+2. Python runtime → serves both API and the static viewer on port 8000
+   (published as 6001)
+
+---
+
+## Credits
+
+Rule-based external agents are redistributed from their authors' public
+Kaggle notebooks (links + versions in each agent's `agent.yaml`). Only the
+vendored Kaggle core and viewer code are original to this repo.
+
+If you're an author and want your agent removed, open an issue.
+
+---
+
+## License
+
+MIT. See [`LICENSE`](LICENSE).

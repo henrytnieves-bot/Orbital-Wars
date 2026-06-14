@@ -1,0 +1,243 @@
+{
+  "schema_version": 1,
+  "last_updated": "2026-06-14T00:13:35.122385+00:00",
+  "ratings": {
+    "baselines/random": {
+      "2p": {
+        "mu": 395.97390701829863,
+        "sigma": 42.55703911345435,
+        "games_played": 70
+      },
+      "4p": {
+        "mu": 509.6076613333908,
+        "sigma": 16.097002187130713,
+        "games_played": 175
+      }
+    },
+    "baselines/starter": {
+      "2p": {
+        "mu": 612.7565283271905,
+        "sigma": 30.259080657201498,
+        "games_played": 120
+      },
+      "4p": {
+        "mu": 562.840971508188,
+        "sigma": 15.449841287788425,
+        "games_played": 525
+      }
+    },
+    "baselines/nearest-sniper": {
+      "2p": {
+        "mu": 515.2743406273146,
+        "sigma": 29.7709705815898,
+        "games_played": 120
+      },
+      "4p": {
+        "mu": 559.7576576913702,
+        "sigma": 15.451918320717086,
+        "games_played": 535
+      }
+    },
+    "external/pilkwang-structured": {
+      "2p": {
+        "mu": 912.9725607370322,
+        "sigma": 38.19093468655581,
+        "games_played": 70
+      },
+      "4p": {
+        "mu": 642.117678311525,
+        "sigma": 16.765025920655336,
+        "games_played": 175
+      }
+    },
+    "external/tamrazov-starwars": {
+      "2p": {
+        "mu": 803.7716932039125,
+        "sigma": 32.25867350157353,
+        "games_played": 185
+      },
+      "4p": {
+        "mu": 572.1422054082769,
+        "sigma": 15.558534431026676,
+        "games_played": 610
+      }
+    },
+    "external/yuriygreben-architect": {
+      "2p": {
+        "mu": 918.6127256394245,
+        "sigma": 37.99746211998607,
+        "games_played": 70
+      },
+      "4p": {
+        "mu": 670.0729953125912,
+        "sigma": 16.997870924139594,
+        "games_played": 175
+      }
+    },
+    "external/sigmaborov-reinforce": {
+      "2p": {
+        "mu": 802.3810888503522,
+        "sigma": 39.302120563352176,
+        "games_played": 70
+      },
+      "4p": {
+        "mu": 629.0868942649103,
+        "sigma": 16.367500762969758,
+        "games_played": 175
+      }
+    },
+    "external/sigmaborov-starter": {
+      "2p": {
+        "mu": 599.9824012402316,
+        "sigma": 42.409290599040446,
+        "games_played": 70
+      },
+      "4p": {
+        "mu": 537.468028733329,
+        "sigma": 15.87215319001959,
+        "games_played": 175
+      }
+    },
+    "external/kashiwaba-rl": {
+      "2p": {
+        "mu": 222.88011128825127,
+        "sigma": 37.27734074766432,
+        "games_played": 70
+      },
+      "4p": {
+        "mu": 532.6724532006435,
+        "sigma": 15.876796490622866,
+        "games_played": 175
+      }
+    },
+    "external/ykhnkf-distance-prioritized": {
+      "2p": {
+        "mu": 222.85171627086208,
+        "sigma": 36.57192141207695,
+        "games_played": 70
+      },
+      "4p": {
+        "mu": 555.6967857765558,
+        "sigma": 15.719591346445553,
+        "games_played": 175
+      }
+    },
+    "external/pascal-orbitwork-v14": {
+      "2p": {
+        "mu": 227.70180133775455,
+        "sigma": 35.962145175497376,
+        "games_played": 70
+      },
+      "4p": {
+        "mu": 542.670150319307,
+        "sigma": 15.780807098932453,
+        "games_played": 175
+      }
+    },
+    "mine/my-agent": {
+      "4p": {
+        "mu": 716.5693985012118,
+        "sigma": 18.89078313329308,
+        "games_played": 420
+      },
+      "2p": {
+        "mu": 1089.9170504426597,
+        "sigma": 24.77237827221393,
+        "games_played": 305
+      }
+    },
+    "recent/im-better": {
+      "4p": {
+        "mu": 571.0498026840038,
+        "sigma": 18.64137880885105,
+        "games_played": 55
+      },
+      "2p": {
+        "mu": 1029.6378674669613,
+        "sigma": 19.519829839769624,
+        "games_played": 210
+      }
+    },
+    "recent/orbit-wars-agent-top-jun-11": {
+      "4p": {
+        "mu": 553.327064231114,
+        "sigma": 15.580601692220457,
+        "games_played": 485
+      },
+      "2p": {
+        "mu": 1101.9976279295424,
+        "sigma": 26.115263824009634,
+        "games_played": 60
+      }
+    },
+    "recent/producer-v2": {
+      "4p": {
+        "mu": 568.2457100378948,
+        "sigma": 15.790620939362267,
+        "games_played": 485
+      },
+      "2p": {
+        "mu": 1164.1945213795166,
+        "sigma": 20.25192925304765,
+        "games_played": 205
+      }
+    },
+    "recent/producer-v5": {
+      "4p": {
+        "mu": 572.953783626456,
+        "sigma": 15.788381357974567,
+        "games_played": 350
+      },
+      "2p": {
+        "mu": 1072.4247913374777,
+        "sigma": 25.341364882697896,
+        "games_played": 60
+      }
+    },
+    "recent/og-producer": {
+      "4p": {
+        "mu": 533.0960895180579,
+        "sigma": 15.446595368186335,
+        "games_played": 350
+      },
+      "2p": {
+        "mu": 1084.5610824850498,
+        "sigma": 25.64996734723477,
+        "games_played": 60
+      }
+    },
+    "recent/stronger": {
+      "4p": {
+        "mu": 551.5007001842617,
+        "sigma": 15.631074063407384,
+        "games_played": 325
+      },
+      "2p": {
+        "mu": 1046.016737882642,
+        "sigma": 32.16544687454173,
+        "games_played": 35
+      }
+    },
+    "recent/shoo": {
+      "2p": {
+        "mu": 884.2041519067246,
+        "sigma": 38.69176614782141,
+        "games_played": 35
+      }
+    },
+    "recent/simplified-orbit-wars-agent": {
+      "2p": {
+        "mu": 1069.3992711073151,
+        "sigma": 31.019655281486028,
+        "games_played": 35
+      }
+    },
+    "recent/submission-50-agent": {
+      "2p": {
+        "mu": 1054.7330134189333,
+        "sigma": 27.20937867673977,
+        "games_played": 60
+      }
+    }
+  }
+}

@@ -1,0 +1,4 @@
+name: My Agent
+description: "Custom agent based on Producer V2 with planned improvements: multi-source coordination, comet exploitation, sun-avoidance routing, economy-weighted targeting, and endgame adaptation."
+author: "Henry Nieves"
+tags: [rule-based, heuristic, production, custom]

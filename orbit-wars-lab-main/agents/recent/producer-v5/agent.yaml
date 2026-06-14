@@ -1,0 +1,5 @@
+name: Producer V5
+description: "Producer Hybrid v4 + Sun Avoidance + Adaptive Horizon. Merges improvements from the Improved Producer notebook."
+author: "Slawek Biel"
+license: "MIT"
+tags: [rule-based, heuristic, production, sun-avoidance]

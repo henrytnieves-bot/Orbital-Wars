@@ -1,0 +1,35 @@
+# Orbit Wars Lab — one-command local launcher.
+# Usage:  docker compose up        (then open http://localhost:6001)
+#
+# The single `app` service runs the Python backend on 8000 and also serves
+# the prebuilt Vite bundle at the same origin. We publish it as :6001 to
+# match the native-dev convention.
+
+services:
+  app:
+    build: .
+    image: orbit-wars-lab:latest
+    container_name: orbit-wars-lab
+    # Drop to the host user so files written to volumes are owned by you,
+    # not root. Defaults to UID 1000 (typical Linux); macOS users can set
+    # UID=$(id -u) GID=$(id -g) in a .env file next to this compose file.
+    user: "${UID:-1000}:${GID:-1000}"
+    ports:
+      - "${PORT:-6001}:8000"
+    # Volumes mount host folders over the image — changes are live, no rebuild.
+    # `agents/` is bidirectional: the image ships 9 agents, which you see in
+    # your local ./agents after the first `docker compose up`. Drop new ones
+    # into ./agents/mine/<name>/ and the container picks them up immediately.
+    # `runs/` persists tournaments + leaderboard + replays across restarts.
+    # `.kaggle/` is opt-in: uncomment the mount (or map your real ~/.kaggle)
+    # to persist the token saved via Settings across container restarts and
+    # to reuse a token you already configured with the Kaggle CLI on the host.
+    volumes:
+      - ./agents:/app/agents
+      - ./runs:/app/runs
+      # - ~/.kaggle:/home/app/.kaggle            # reuse host's existing token
+      # - ./.kaggle-data:/home/app/.kaggle       # keep a per-project token
+    environment:
+      # Point the Kaggle SDK at the non-root home so `user:` mapping works.
+      HOME: /home/app
+    restart: unless-stopped
